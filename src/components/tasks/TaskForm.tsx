@@ -6,6 +6,7 @@ import { priorityLabels } from '@/lib/labels'
 import { useTaskStore } from '@/store/taskStore'
 import { TASK_PRIORITIES, type Task, type TaskPriority } from '@/types'
 import { newTaskInputSchema } from '@/types/schemas'
+import { TagPicker } from './TagPicker'
 
 interface TaskFormProps {
   listId: string
@@ -21,6 +22,7 @@ export function TaskForm({ listId, task, onDone }: TaskFormProps) {
   const [priority, setPriority] = useState<TaskPriority>(task?.priority ?? 'medium')
   const [category, setCategory] = useState(task?.category ?? '')
   const [dueDate, setDueDate] = useState(task?.dueDate ?? '')
+  const [tagIds, setTagIds] = useState<string[]>(task?.tags ?? [])
   const [error, setError] = useState('')
 
   function handleSubmit(event: FormEvent) {
@@ -31,6 +33,7 @@ export function TaskForm({ listId, task, onDone }: TaskFormProps) {
       priority,
       category,
       dueDate: dueDate || undefined,
+      tags: tagIds,
     })
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? 'Datos inválidos')
@@ -43,6 +46,7 @@ export function TaskForm({ listId, task, onDone }: TaskFormProps) {
         priority,
         category: parsed.data.category ?? '',
         dueDate: parsed.data.dueDate,
+        tags: tagIds,
       })
     } else {
       addTask(listId, parsed.data)
@@ -123,6 +127,8 @@ export function TaskForm({ listId, task, onDone }: TaskFormProps) {
           />
         </div>
       </div>
+
+      <TagPicker value={tagIds} onChange={setTagIds} />
 
       {error && <p className="text-sm text-destructive">{error}</p>}
 
