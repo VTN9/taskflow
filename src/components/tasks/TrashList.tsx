@@ -1,4 +1,5 @@
 import { RotateCcw, Trash2 } from 'lucide-react'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { useTaskStore } from '@/store/taskStore'
 import { selectTrashed } from '@/store/selectors'
@@ -37,7 +38,10 @@ export function TrashList() {
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => restoreTask(task.id)}
+                  onClick={() => {
+                    restoreTask(task.id)
+                    toast.success('Tarea restaurada')
+                  }}
                 >
                   <RotateCcw className="size-4" aria-hidden="true" />
                   Restaurar
@@ -46,7 +50,10 @@ export function TrashList() {
                   type="button"
                   variant="destructive"
                   size="sm"
-                  onClick={() => purgeTask(task.id)}
+                  onClick={() => {
+                    purgeTask(task.id)
+                    toast.success('Tarea eliminada')
+                  }}
                 >
                   <Trash2 className="size-4" aria-hidden="true" />
                   Eliminar

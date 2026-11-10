@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Toaster } from 'sonner'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { TaskBoard } from '@/components/tasks/TaskBoard'
 import { TrashList } from '@/components/tasks/TrashList'
@@ -15,7 +16,7 @@ function App() {
     : (lists[0]?.id ?? null)
 
   return (
-    <div className="flex min-h-svh">
+    <div className="flex min-h-svh flex-col md:flex-row">
       <Sidebar
         lists={lists}
         tasks={tasks}
@@ -28,7 +29,7 @@ function App() {
         onShowTrash={() => setView('trash')}
       />
 
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-4 md:p-6">
         {view === 'trash' ? (
           <TrashList />
         ) : currentListId ? (
@@ -39,6 +40,8 @@ function App() {
           </p>
         )}
       </main>
+
+      <Toaster position="bottom-right" richColors />
     </div>
   )
 }
