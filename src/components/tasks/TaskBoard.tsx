@@ -6,7 +6,7 @@ import { useTaskStore } from '@/store/taskStore'
 import { selectTasksByList } from '@/store/selectors'
 import { TaskFilters } from './TaskFilters'
 import { TaskForm } from './TaskForm'
-import { TaskList } from './TaskList'
+import { SortableTaskList } from './SortableTaskList'
 
 export function TaskBoard({ listId }: { listId: string }) {
   const list = useTaskStore((state) => state.lists.find((item) => item.id === listId))
@@ -42,7 +42,7 @@ export function TaskBoard({ listId }: { listId: string }) {
 
       <TaskFilters filters={filters} onChange={setFilters} tags={tags} />
 
-      <TaskList tasks={filtered} />
+      <SortableTaskList tasks={filtered} listId={listId} />
     </section>
   )
 }
