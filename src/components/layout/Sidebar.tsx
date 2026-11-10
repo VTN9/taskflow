@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { useTaskStore } from '@/store/taskStore'
 import { selectPendingCount } from '@/store/selectors'
 import type { Task, TaskList } from '@/types'
+import { SettingsPanel } from './SettingsPanel'
 import { ThemeToggle } from './ThemeToggle'
 
 interface SidebarProps {
@@ -70,6 +71,7 @@ export function Sidebar({
         </button>
       </nav>
 
+      <SettingsPanel />
       <ThemeToggle />
 
       <form
