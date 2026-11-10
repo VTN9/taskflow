@@ -3,6 +3,7 @@ import { Toaster } from 'sonner'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { TaskBoard } from '@/components/tasks/TaskBoard'
 import { TrashList } from '@/components/tasks/TrashList'
+import { useReminders } from '@/hooks/useReminders'
 import { useTaskStore } from '@/store/taskStore'
 
 export function Workspace() {
@@ -10,6 +11,8 @@ export function Workspace() {
   const tasks = useTaskStore((state) => state.tasks)
   const [activeListId, setActiveListId] = useState<string | null>(lists[0]?.id ?? null)
   const [view, setView] = useState<'tasks' | 'trash'>('tasks')
+
+  useReminders()
 
   const currentListId = lists.some((list) => list.id === activeListId)
     ? activeListId
