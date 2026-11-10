@@ -1,5 +1,6 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { formatDate, isOverdue } from '@/lib/date'
 import { cn } from '@/lib/utils'
@@ -30,8 +31,18 @@ export function TaskItem({ task, dragHandle }: TaskItemProps) {
   const overdue = !completed && isOverdue(task.dueDate)
   const taskTags = tags.filter((tag) => task.tags.includes(tag.id))
 
+  const toggleCompleted = () => {
+    setTaskStatus(task.id, completed ? 'todo' : 'completed')
+    toast.success(completed ? 'Tarea reabierta' : 'Tarea completada')
+  }
+
+  const sendToTrash = () => {
+    setTaskStatus(task.id, 'trashed')
+    toast('Tarea enviada a la papelera')
+  }
+
   return (
-    <div className="flex items-start gap-2 rounded-lg border bg-card p-3">
+    <div className="flex items-start gap-2 rounded-lg border bg-card p-3 transition-shadow hover:shadow-sm">
       {dragHandle}
 
       <input
@@ -39,7 +50,7 @@ export function TaskItem({ task, dragHandle }: TaskItemProps) {
         className="mt-1 size-4 accent-primary"
         checked={completed}
         aria-label={completed ? `Reabrir ${task.title}` : `Completar ${task.title}`}
-        onChange={() => setTaskStatus(task.id, completed ? 'todo' : 'completed')}
+        onChange={toggleCompleted}
       />
 
       <div className="min-w-0 flex-1">
@@ -84,7 +95,7 @@ export function TaskItem({ task, dragHandle }: TaskItemProps) {
           variant="ghost"
           size="icon"
           aria-label={`Eliminar ${task.title}`}
-          onClick={() => setTaskStatus(task.id, 'trashed')}
+          onClick={sendToTrash}
         >
           <Trash2 className="size-4" aria-hidden="true" />
         </Button>

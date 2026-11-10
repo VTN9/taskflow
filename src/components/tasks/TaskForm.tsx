@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -48,8 +49,10 @@ export function TaskForm({ listId, task, onDone }: TaskFormProps) {
         dueDate: parsed.data.dueDate,
         tags: tagIds,
       })
+      toast.success('Tarea actualizada')
     } else {
       addTask(listId, parsed.data)
+      toast.success('Tarea creada')
     }
     onDone()
   }

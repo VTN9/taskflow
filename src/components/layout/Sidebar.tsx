@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { useTaskStore } from '@/store/taskStore'
 import { selectPendingCount } from '@/store/selectors'
 import type { Task, TaskList } from '@/types'
+import { ThemeToggle } from './ThemeToggle'
 
 interface SidebarProps {
   lists: TaskList[]
@@ -28,7 +29,7 @@ export function Sidebar({
   const [name, setName] = useState('')
 
   return (
-    <aside className="flex w-64 shrink-0 flex-col gap-4 border-r bg-card/40 p-4">
+    <aside className="flex w-full shrink-0 flex-col gap-4 border-b bg-card/40 p-4 md:w-64 md:border-b-0 md:border-r">
       <div className="flex items-center gap-2 px-1">
         <ListTodo className="size-6 text-primary" aria-hidden="true" />
         <h1 className="text-lg font-semibold tracking-tight">TaskFlow</h1>
@@ -68,6 +69,8 @@ export function Sidebar({
           Papelera
         </button>
       </nav>
+
+      <ThemeToggle />
 
       <form
         className="flex items-center gap-2"
