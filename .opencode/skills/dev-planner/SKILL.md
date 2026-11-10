@@ -22,13 +22,17 @@ Esta skill guía al agente de desarrollo para estructurar, versionar y ejecutar 
 ## Flujo de Trabajo a Seguir
 
 ### Fase 1: Creación del Plan de Desarrollo
+
 Antes de iniciar cualquier código, presenta al usuario un desglose estructurado que contenga:
+
 - **Fases del proyecto** con sus objetivos claros.
 - **Rama asignada** para cada fase (ej. `feature/fase-1-setup`).
 - **Versión SemVer asignada** (ej. `0.1.0`).
 
 ### Fase 2: Ejecución Fase por Fase
+
 Para cada fase planificada, sigue este ciclo:
+
 1. **Crear y cambiar a la rama de la fase** partiendo de `develop`:
    ```bash
    git checkout develop
@@ -48,6 +52,7 @@ Para cada fase planificada, sigue este ciclo:
 6. **Reportar** versión, rama y estado de tests, y pasar a la siguiente fase solo si todo está integrado y en verde.
 
 ### Fase 3: Verificación Global y Pase Final a Main
+
 1. Confirmar que **todas** las fases están integradas en `develop`.
 2. Ejecutar la **suite completa de tests** sobre `develop`.
 3. Presentar un resumen del proyecto y **solicitar la aprobación explícita del usuario**.
@@ -61,6 +66,7 @@ Para cada fase planificada, sigue este ciclo:
 5. Sin aprobación, detenerse y dejar el proyecto en `develop`.
 
 ## Prohibiciones Absolutas
+
 - **NUNCA** fusionar una fase directamente a `main`.
 - **NUNCA** alcanzar ni superar la versión `1.0.0`.
 - **NUNCA** integrar una fase en `develop` si los tests fallan.

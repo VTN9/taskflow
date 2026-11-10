@@ -8,19 +8,19 @@
 
 ## 1. Stack y arquitectura
 
-| Capa | Tecnología |
-| :--- | :--- |
-| Hosting & Deploy | Vercel |
+| Capa               | Tecnología                                                                                               |
+| :----------------- | :------------------------------------------------------------------------------------------------------- |
+| Hosting & Deploy   | Vercel                                                                                                   |
 | Framework Frontend | React 19 + Vite + TypeScript (Next.js 15+ App Router como alternativa si se requiere SSR/Server Actions) |
-| Estilos | Tailwind CSS v4 |
-| Componentes UI | shadcn/ui + Radix UI |
-| Iconografía | Lucide React |
-| Drag & Drop | @dnd-kit/core + @dnd-kit/sortable |
-| Persistencia Cloud | Vercel KV / Upstash Redis o Supabase (JSONB) |
-| Persistencia Local | localStorage (modo offline) |
-| Notificaciones | Web Notifications API + Sonner |
-| Estado | Zustand (store tipado con persistencia) |
-| Tests | Vitest + React Testing Library + Playwright (E2E) |
+| Estilos            | Tailwind CSS v4                                                                                          |
+| Componentes UI     | shadcn/ui + Radix UI                                                                                     |
+| Iconografía        | Lucide React                                                                                             |
+| Drag & Drop        | @dnd-kit/core + @dnd-kit/sortable                                                                        |
+| Persistencia Cloud | Vercel KV / Upstash Redis o Supabase (JSONB)                                                             |
+| Persistencia Local | localStorage (modo offline)                                                                              |
+| Notificaciones     | Web Notifications API + Sonner                                                                           |
+| Estado             | Zustand (store tipado con persistencia)                                                                  |
+| Tests              | Vitest + React Testing Library + Playwright (E2E)                                                        |
 
 ### Ramas
 
@@ -36,21 +36,21 @@ Estado JSON según el PRD: `user`, `lists`, `tasks`, `tags`. Tipos TypeScript en
 
 ## 2. Fases del proyecto
 
-| Fase | Rama | Versión | Objetivo |
-| :--- | :--- | :--- | :--- |
-| 1 | `feature/fase-1-setup` | `0.1.0` | Scaffolding, tooling y base de calidad |
-| 2 | `feature/fase-2-modelo-estado` | `0.2.0` | Tipos, store Zustand y persistencia local |
-| 3 | `feature/fase-3-crud-tareas` | `0.3.0` | CRUD de listas y tareas |
-| 4 | `feature/fase-4-vistas-filtros` | `0.4.0` | Vistas por estado, prioridad, tags y fechas |
-| 5 | `feature/fase-5-drag-drop` | `0.5.0` | Reordenación con @dnd-kit |
-| 6 | `feature/fase-6-ui-ux` | `0.6.0` | Tema, responsive, micro-interacciones y toasts |
-| 7 | `feature/fase-7-cloud-sharing` | `0.7.0` | Persistencia cloud y compartir en tiempo real |
-| 8 | `feature/fase-8-notificaciones` | `0.8.0` | Recordatorios y Web Notifications |
-| 9 | `feature/fase-9-deploy-e2e` | `0.9.0` | Deploy en Vercel, E2E y hardening |
+| Fase | Rama                            | Versión | Objetivo                                       |
+| :--- | :------------------------------ | :------ | :--------------------------------------------- |
+| 1    | `feature/fase-1-setup`          | `0.1.0` | Scaffolding, tooling y base de calidad         |
+| 2    | `feature/fase-2-modelo-estado`  | `0.2.0` | Tipos, store Zustand y persistencia local      |
+| 3    | `feature/fase-3-crud-tareas`    | `0.3.0` | CRUD de listas y tareas                        |
+| 4    | `feature/fase-4-vistas-filtros` | `0.4.0` | Vistas por estado, prioridad, tags y fechas    |
+| 5    | `feature/fase-5-drag-drop`      | `0.5.0` | Reordenación con @dnd-kit                      |
+| 6    | `feature/fase-6-ui-ux`          | `0.6.0` | Tema, responsive, micro-interacciones y toasts |
+| 7    | `feature/fase-7-cloud-sharing`  | `0.7.0` | Persistencia cloud y compartir en tiempo real  |
+| 8    | `feature/fase-8-notificaciones` | `0.8.0` | Recordatorios y Web Notifications              |
+| 9    | `feature/fase-9-deploy-e2e`     | `0.9.0` | Deploy en Vercel, E2E y hardening              |
 
 ### Fase 1 — Setup (0.1.0)
 
-- **Objetivo:** proyecto React 19 + Vite + TypeScript con Tailwind v4, shadcn/ui, Lucide, ESLint/Prettier y Vitest configurados.
+- **Objetivo:** proyecto React 19 + Vite + TypeScript con Tailwind v4, shadcn/ui, Lucide, oxlint/Prettier y Vitest configurados.
 - **Entregables:** estructura `src/`, alias `@/`, `.env.example`, scripts `dev`, `build`, `test`, `lint`, `typecheck`.
 - **Tests:** smoke test de render de `App`; `lint` y `typecheck` en verde.
 - **DoD:** `npm run build`, `npm run test`, `npm run lint` y `npm run typecheck` pasan.
