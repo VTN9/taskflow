@@ -1,6 +1,7 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { formatDate, isOverdue } from '@/lib/date'
 import { cn } from '@/lib/utils'
 import { useTaskStore } from '@/store/taskStore'
 import type { Task } from '@/types'
@@ -9,6 +10,7 @@ import { TaskForm } from './TaskForm'
 
 export function TaskItem({ task }: { task: Task }) {
   const setTaskStatus = useTaskStore((state) => state.setTaskStatus)
+  const tags = useTaskStore((state) => state.tags)
   const [editing, setEditing] = useState(false)
 
   if (editing) {
@@ -20,6 +22,8 @@ export function TaskItem({ task }: { task: Task }) {
   }
 
   const completed = task.status === 'completed'
+  const overdue = !completed && isOverdue(task.dueDate)
+  const taskTags = tags.filter((tag) => task.tags.includes(tag.id))
 
   return (
     <li className="flex items-start gap-3 rounded-lg border bg-card p-3">
@@ -41,7 +45,20 @@ export function TaskItem({ task }: { task: Task }) {
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <PriorityBadge priority={task.priority} />
           {task.category && <span>{task.category}</span>}
-          {task.dueDate && <span>Vence: {task.dueDate}</span>}
+          {task.dueDate && (
+            <span className={cn(overdue && 'font-medium text-destructive')}>
+              Vence: {formatDate(task.dueDate)}
+            </span>
+          )}
+          {taskTags.map((tag) => (
+            <span
+              key={tag.id}
+              className="rounded-full border px-2 py-0.5"
+              style={{ borderColor: tag.color, color: tag.color }}
+            >
+              {tag.name}
+            </span>
+          ))}
         </div>
       </div>
 
