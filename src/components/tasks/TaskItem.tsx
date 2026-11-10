@@ -1,5 +1,5 @@
 import { Pencil, Trash2 } from 'lucide-react'
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Button } from '@/components/ui/button'
 import { formatDate, isOverdue } from '@/lib/date'
 import { cn } from '@/lib/utils'
@@ -8,16 +8,21 @@ import type { Task } from '@/types'
 import { PriorityBadge } from './PriorityBadge'
 import { TaskForm } from './TaskForm'
 
-export function TaskItem({ task }: { task: Task }) {
+interface TaskItemProps {
+  task: Task
+  dragHandle?: ReactNode
+}
+
+export function TaskItem({ task, dragHandle }: TaskItemProps) {
   const setTaskStatus = useTaskStore((state) => state.setTaskStatus)
   const tags = useTaskStore((state) => state.tags)
   const [editing, setEditing] = useState(false)
 
   if (editing) {
     return (
-      <li>
+      <div>
         <TaskForm listId={task.listId} task={task} onDone={() => setEditing(false)} />
-      </li>
+      </div>
     )
   }
 
@@ -26,7 +31,9 @@ export function TaskItem({ task }: { task: Task }) {
   const taskTags = tags.filter((tag) => task.tags.includes(tag.id))
 
   return (
-    <li className="flex items-start gap-3 rounded-lg border bg-card p-3">
+    <div className="flex items-start gap-2 rounded-lg border bg-card p-3">
+      {dragHandle}
+
       <input
         type="checkbox"
         className="mt-1 size-4 accent-primary"
@@ -82,6 +89,6 @@ export function TaskItem({ task }: { task: Task }) {
           <Trash2 className="size-4" aria-hidden="true" />
         </Button>
       </div>
-    </li>
+    </div>
   )
 }
