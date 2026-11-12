@@ -16,6 +16,14 @@ coverage
 .env.*
 !.env.example
 
+# Playwright
+playwright-report
+test-results
+blob-report
+
+# Vercel
+.vercel
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
